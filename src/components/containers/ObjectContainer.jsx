@@ -12,24 +12,33 @@ const style = {
 
 const ObjectContainer = () => {
 
-  const initColor = { red:'0',green:'0',blue:'0' }  
+  const initColor = { red:'0',green:'0',blue:'0' }
+  const [loop,setLoop] = useState(0);  
   const [color,setColor] = useState ( initColor )
 
   const colorRandom = () => {
     return Math.random() * (256 - 0) + 0;
   }
 
-  const changeColor = () => {
+  const setRgb = () => {
     let copyColor = color
     copyColor.red = colorRandom()
     copyColor.green = colorRandom()
     copyColor.blue = colorRandom()
 
-    setColor({...copyColor})
+    return copyColor
   }
 
-  const returnInitColor=()=>{
-    setColor({...initColor})
+  const changeColor = () => {
+    setLoop(setInterval(function(){
+      setColor({...setRgb()})
+    }, 500)
+    )
+
+  }
+
+  const stopLoop=()=>{
+    return clearInterval(loop);
   } 
 
   return (
@@ -37,7 +46,7 @@ const ObjectContainer = () => {
         <Square
             color={ color }
             changeColor={ changeColor }
-            returInitColor={ returnInitColor }
+            stopLoop={ stopLoop }
         />
     </div>
   )

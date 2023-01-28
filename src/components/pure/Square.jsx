@@ -1,17 +1,18 @@
 import React from 'react'
 
-const Square = ({color,changeColor,returInitColor}) => {
+const Square = ({color,changeColor,stopLoop}) => {
 
   return (
     <div 
     onMouseEnter={ () => { changeColor() } } 
-    onMouseOut={ () => { returInitColor() } }
-    onDoubleClick={ () => { returInitColor() } } 
+    onMouseOut={ () => { stopLoop() } }
+    onDoubleClick={ () => { stopLoop() } } 
     style={{
         width:'255px',
         height:'255px',
         cursor:'pointer',
-        backgroundColor:`rgb(${color.red},${color.green},${color.blue})`
+        backgroundColor:`rgb(${color.red},${color.green},${color.blue})`,
+        transition:'0.5s all'
     }}/>
   )
 }
